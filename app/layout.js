@@ -1,6 +1,8 @@
 import { AuthProvider } from "./Providers";
 import "./globals.css";
 import { Inter } from "next/font/google";
+// import Navbar from "@/components/Navbar";
+// import { useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,10 +12,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // const router = useRouter();
+  // const hideNavbar = router.pathname === '/dashboard';
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+        {/* {!hideNavbar && <Navbar />} */}
+        
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
