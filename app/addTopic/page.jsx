@@ -6,23 +6,14 @@ import { useRouter } from "next/navigation";
 export default function AddTopic() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !title ||
-      !description ||
-      !selectedDate ||
-      !selectedTime 
-
-    ) {
-      alert("Please filled all requirements.");
+    if (!title || !description) {
+      alert("Title and description are required.");
       return;
     }
 
@@ -32,13 +23,7 @@ export default function AddTopic() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({
-          title,
-          description,
-          selectedDate,
-          selectedTime,
-
-        }),
+        body: JSON.stringify({ title, description }),
       });
 
       if (res.ok) {
@@ -51,57 +36,29 @@ export default function AddTopic() {
     }
   };
 
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-  };
-
-  const handleTimeChange = (e) => {
-    setSelectedTime(e.target.value);
-  };
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex justify-center items-center w-full mt-20 flex-col gap-3"
-    >
+    <form onSubmit={handleSubmit} className="w-full justify-center items-center mt-20 flex flex-col gap-3">
       <input
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         className="border border-slate-500 px-8 py-2"
         type="text"
-        placeholder="Apointment For"
+        placeholder="DR NAME"
       />
+
       <input
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         className="border border-slate-500 px-8 py-2"
         type="text"
-        placeholder="Apointment description"
+        placeholder="Reason for apointment"
       />
-      <input
-        value={selectedDate}
-        onChange={(e) => setSelectedDate(e.target.value)}
-        className="border border-slate-500 px-8 py-2"
-        type="date"
-      />
-      <input
-        value={selectedTime}
-        onChange={(e) => setSelectedTime(e.target.value)}
-        className="border border-slate-500 px-8 py-2"
-        type="time"
-      />
-
-     
-     
 
       <button
         type="submit"
         className="bg-green-600 font-bold text-white py-3 px-6 w-fit"
       >
-        Add Topic
+        Add Apointment
       </button>
     </form>
   );

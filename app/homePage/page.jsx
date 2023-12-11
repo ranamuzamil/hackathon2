@@ -2,12 +2,18 @@
 import React from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import { Suspense } from "react";
+
 
 
 function HomePage() {
 
   return (<>
   <Navbar/>
+  <Suspense fallback={<p>Loading feed...</p>}>
+
+
     <div>
   
       <div
@@ -38,7 +44,7 @@ function HomePage() {
         </div>
       </div>
       <div className="flex m-20 justify-center flex-col items-center">
-        <img src="/i1.png" />
+        {/* <Image alt="this" src="/i1.png" className="w-96 h-96" /> */}
         <h1 className="font-mono text-4xl">
           <span className="text-6xl text-blue-400">VistaCare </span>Passionate
           About <br /> Helping Take Care of Your Eyes
@@ -57,6 +63,7 @@ function HomePage() {
         </Link>
       </div>
     </div>
+    </Suspense>
     </>
   );
 }
